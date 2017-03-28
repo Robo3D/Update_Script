@@ -130,8 +130,8 @@ class Update_Checker():
             self.update_version()
             logging.info("...Complete.")
             #restart the machine
-            logging.info("Rebooting system...")
-            subprocess.call("sudo reboot", shell=True)
+            # logging.info("Rebooting system...")
+            # subprocess.call("sudo reboot", shell=True)
             logging.info("Exiting....")
             exit(0)
         else:
@@ -141,4 +141,4 @@ class Update_Checker():
 
 
 if __name__ == '__main__':
-    Update_Checker()
+    Update_Checker(path='/home/pi/.octoprint/data/RoboLCD/roboOS.txt')
