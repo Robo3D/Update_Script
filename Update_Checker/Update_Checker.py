@@ -141,4 +141,4 @@ class Update_Checker():
 
 
 if __name__ == '__main__':
-    Update_Checker(path='/home/pi/.octoprint/data/RoboLCD/roboOS.txt')
+    Update_Checker(versioning_path='/home/pi/.octoprint/data/RoboLCD/roboOS.txt')
