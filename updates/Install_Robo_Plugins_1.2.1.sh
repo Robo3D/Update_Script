@@ -22,7 +22,7 @@ install_plugin "https://github.com/Robo3D/OctoPrint-EEPROM-Marlin/archive/0.1.5.
 install_plugin "https://github.com/Robo3D/OctoPrint-Netconnectd/archive/0.2.zip"
 
 #Robotheme
-install_plugin "https://github.com/Robo3D/OctoPrint-robotheme/archive/0.2.2.zip"
+install_plugin "https://github.com/Robo3D/OctoPrint-robotheme/archive/0.2.3.zip"
 
 #Print History
 install_plugin "https://github.com/Robo3D/OctoPrint-PrintHistory/archive/0.92.zip"
@@ -32,9 +32,6 @@ install_plugin "https://github.com/Robo3D/OctoPrint-Stats/archive/1.0.1.zip"
 
 #Request Spinner
 install_plugin "https://github.com/Robo3D/OctoPrint-RequestSpinner/archive/0.1.2.zip"
-
-#ScreenSquish
-install_plugin "https://github.com/Robo3D/OctoPrint-ScreenSquish/archive/0.1.zip"
 
 #kaa print event
 install_plugin "https://github.com/Robo3D/Kaa_Printevent/archive/0.1.0.zip"
