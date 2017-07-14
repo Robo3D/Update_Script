@@ -9,7 +9,7 @@ install_plugin () {
     $USER_PI $HOME_DIR/$VENV/bin/pip install $1
 }
 
-install_plugin "https://github.com/Robo3D/OctoPrint-robotheme/archive/0.2.3.zip"
+install_plugin "https://github.com/Robo3D/OctoPrint-robotheme/archive/0.3.0.zip"
 
 #complete the update
 echo ${0##*/} >> /home/pi/.updates.txt
