@@ -17,7 +17,7 @@ cd $THIS_DIR/../assets
 sudo service roboRemoteUpdateSystem restart
 # give RRUS time to start up
 sleep 5
-VAL=$(python run_playbook.py)
+python run_playbook.py &
 if [ $? -eq 0 ]; then
   echo "successfully run_playbook.py" >> /home/pi/SHINFO.txt
 else
