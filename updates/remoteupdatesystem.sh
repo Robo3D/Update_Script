@@ -20,9 +20,9 @@ sleep 5
 python run_playbook.py
 if [ $? -eq 0 ]
 then
-  echo "successfully run_playbook.py"
+  echo "successfully run_playbook.py" >> /home/pi/SHINFO.txt
 else
-  echo "unsuccessfully run_playbook.py"
+  echo "unsuccessfully run_playbook.py" >> /home/pi/SHINFO.txt
   exit 1
 fi
 
