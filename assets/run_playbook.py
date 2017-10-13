@@ -23,7 +23,8 @@ if __name__ == '__main__':
     try:
         r = requests.get(state_url, timeout=1)
         if r.status_code is not 200:
-            raise
+            msg = 'GET status code: {} \n Raw Response: {}'.format(r.status_code, r.content)
+            raise Exception(msg)
         pkgs = r.json()
         # TODO distinguish between R2 and C2 packages and target
         if 'C2' in get_model(config_path):
@@ -33,7 +34,8 @@ if __name__ == '__main__':
 
         r = requests.post(update_url, json=pkg, timeout=1)
         if r.status_code is not 200:
-            raise
+            msg = 'GET status code: {} \n Raw Response: {}'.format(r.status_code, r.content)
+            raise Exception(msg)
     except Exception as e:
         print "####ERROR WITH RUNNNING PLAYBOOK!!!!"
         with open('/home/pi/INFO.txt', 'w+') as f:
