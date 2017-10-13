@@ -1,7 +1,7 @@
 #! /home/pi/oprint/bin/python
 
 import requests
-from sys import exit
+from sys import exit, stdout
 import yaml
 
 url = 'http://127.0.0.1:8888'
@@ -37,9 +37,9 @@ if __name__ == '__main__':
             msg = 'GET status code: {} \n Raw Response: {}'.format(r.status_code, r.content)
             raise Exception(msg)
     except Exception as e:
-        print e
         with open('/home/pi/INFO.txt', 'w+') as f:
             f.write(str(e))
+        stdout.write(str(e))
         exit(1)
     else:
         exit(0)
