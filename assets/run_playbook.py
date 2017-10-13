@@ -36,7 +36,8 @@ if __name__ == '__main__':
             raise
     except Exception as e:
         print "####ERROR WITH RUNNNING PLAYBOOK!!!!"
-        print e
+        with open('/home/pi/INFO.txt', 'w+') as f:
+            f.write(str(e))
         exit(1)
     else:
         exit(0)
