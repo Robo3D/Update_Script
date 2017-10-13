@@ -42,4 +42,6 @@ if __name__ == '__main__':
         stdout.write(str(e))
         exit(1)
     else:
+        with open('/home/pi/INFO.txt', 'w+') as f:
+            f.write("Successfully finished up!")        
         exit(0)
