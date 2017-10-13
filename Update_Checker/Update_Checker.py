@@ -131,7 +131,7 @@ class Update_Checker():
             logging.info("...Complete.")
             #restart the machine
             logging.info("Rebooting system...")
-            subprocess.call("sudo reboot", shell=True)
+            # subprocess.call("sudo reboot", shell=True)
             logging.info("Exiting....")
             exit(0)
         else:
