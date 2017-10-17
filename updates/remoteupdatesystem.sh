@@ -1,6 +1,6 @@
 #!/bin/bash
 
-THIS_DIR=$(echo $(pwd))
+THIS_DIR=`dirname $0`
 RRUS_DIR=$THIS_DIR/../roboRemoteUpdateSystem
 USER_PI="sudo -u pi"
 LOG=/home/pi/SHINFO.txt
