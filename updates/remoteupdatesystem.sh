@@ -12,10 +12,16 @@ cd $RRUS_DIR
 chmod +x install.sh
 ./install.sh
 
-echo "Running playbook..."
+echo "Starting roboRemoteUpdateSystem in 15 seconds..."
 sudo service roboRemoteUpdateSystem restart
 # give RRUS time to start up
-sleep 5
+for i in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
+do
+  sleep 1
+  echo $i
+done
+
+echo "Running playbook..."
 $USER_PI /home/pi/oprint/bin/python $THIS_DIR/../assets/run_playbook.py
 if [ $? -eq 0 ]; then
   echo "successfully run_playbook.py" >> /home/pi/SHINFO.txt
