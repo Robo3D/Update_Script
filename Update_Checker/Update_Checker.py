@@ -119,21 +119,32 @@ class Update_Checker():
             for update in self.needed_updates:
                 print("\t" + update)
 
-
+            exit_codes = []
             for update in self.needed_updates:
                 print("Executing " + update)
                 logging.info("Start... package: {}".format(update))
-                subprocess.call(["sudo bash "+ self.updates_path + update], shell=True)
-                logging.info("Complete... package: {}".format(update))
+                ec = subprocess.call(["sudo bash "+ self.updates_path + update], shell=True)
+                exit_codes.append(ec)
+                if ec is 0:
+                    logging.info("Complete... package: {}".format(update))
+                else:
+                    logging.info("Failed... package: {}".format(update))
 
-            logging.info("Updating Version...")
-            self.update_version()
-            logging.info("...Complete.")
-            #restart the machine
-            logging.info("Rebooting system...")
-            # subprocess.call("sudo reboot", shell=True)
-            logging.info("Exiting....")
-            exit(0)
+            success_count = exit_codes.count(0)
+            failed_count = exit_codes.count(1)
+            count_msg = 'Success: {} Failed: {}'.format(success_count, failed_count)
+            logging.info(count_msg)
+            if 1 in exit_codes:
+                logging.info('Failed detected... Not updating version.')
+            else:
+                logging.info("Updating Version...")
+                self.update_version()
+                logging.info("...Complete.")
+                #restart the machine
+                logging.info("Deferring reboot to new update system...")
+                # subprocess.call("sudo reboot", shell=True)
+                logging.info("Exiting....")
+                exit(0)
         else:
             self.update_version()
             exit(0)
