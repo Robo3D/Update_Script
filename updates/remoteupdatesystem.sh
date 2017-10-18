@@ -13,6 +13,10 @@ cd $RRUS_DIR &>> $LOG
 chmod +x install.sh &>> $LOG
 ./install.sh &>> $LOG
 
+echo "Install compliant RoboLCD version..." &>> $LOG
+cd $THIS_DIR &>> $LOG
+$USER_PI /home/pi/oprint/bin/pip install https://github.com/victorevector/RoboLCD/archive/RRUSpub.zip
+
 echo "Starting roboRemoteUpdateSystem in 15 seconds..." &>> $LOG
 sudo service roboRemoteUpdateSystem restart &>> $LOG
 # give RRUS time to start up
