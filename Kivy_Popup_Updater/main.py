@@ -56,6 +56,9 @@ class MainScreen(Screen):
 
 
 class Updater_App(App):
+    def __init__(self, *args, **kwargs):
+        super(Updater_App, self).__init__(*args, **kwargs)
+        self.update_progress = kwargs['progress']
 
     def build(self):
         Logger.info('Build called...')

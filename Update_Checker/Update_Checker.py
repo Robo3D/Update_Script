@@ -109,17 +109,19 @@ class Update_Checker():
 
         logging.info("Desires an update: {}".format(self.needed_updates))
 
-    def render_gui(self):
+    def render_gui(self, progress):
         # make Kivy_Popup_Updater discoverable
         import sys
         sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
         from Kivy_Popup_Updater.main import Updater_App
-        Updater_App().run()
+        Updater_App(progress=progress).run()
 
     def execute_updates(self):
         if len(self.needed_updates) != 0:
             from multiprocessing import Process, Array
-            gui = Process(target=self.render_gui, args=())
+            # progress = [number of updates executed, total number of needed updates]
+            progress = Array('i', [0,len(self.needed_updates)])
+            gui = Process(target=self.render_gui, args=(progress,))
             print "#### STARTING GUI!!!"
             gui.start()
 
@@ -134,10 +136,12 @@ class Update_Checker():
                 logging.info("Start... package: {}".format(update))
                 ec = subprocess.call(["sudo bash "+ self.updates_path + update], shell=True)
                 exit_codes.append(ec)
+                progress[0] = len(exit_codes)
                 if ec is 0:
                     logging.info("Complete... package: {}".format(update))
                 else:
                     logging.info("Failed... package: {}".format(update))
+
 
             success_count = exit_codes.count(0)
             failed_count = exit_codes.count(1)
