@@ -38,7 +38,7 @@ from kivy.core.window import Window
 from kivy.clock import Clock
 import subprocess
 
-from popup_screen import Updating_Popup
+from popup_screen import Updating_Popup, USB_Progress_Popup
 
 DIR_PATH = os.path.dirname(os.path.realpath(__file__))
 resource_add_path(DIR_PATH)
@@ -52,7 +52,7 @@ class Updater_Screen_Manager(ScreenManager):
 class MainScreen(Screen):
     def __init__(self,**kwargs):
         super(MainScreen, self).__init__(**kwargs)
-        poppy = Updating_Popup()
+        poppy = USB_Progress_Popup()
 
 
 class Updater_App(App):

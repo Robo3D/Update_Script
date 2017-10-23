@@ -34,6 +34,72 @@
                 center_x: popup.center_x
                 center_y: popup.center_y - 50
 
+<USB_Progress_Popup>:
+    background_color: 0,0,0,1
+    id: popup
+    size_hint_x: None
+    size_hint_y: None
+    size: 600, 400
+    auto_dismiss: False
+    canvas.after:
+        Color:
+            rgba: 0.41,0.7,0.91,1
+        Line:
+            cap: 'round'
+            joint: 'round'
+            close: False
+            width: 3
+            points: popup.x, popup.y, popup.x, popup.y + 400, popup.x + 600, popup.y + 400, popup.x + 600, popup.y, popup.x,popup.y
+        #progress bar
+        Color:
+            #grey 3B3E45
+            rgba: 0.231372549,0.243137255,0.270588235,1
+        Rectangle:
+            id:progress_outline
+            pos:popup.center_x - 175, popup.y + 50
+            size: 350, 25
+
+        Color:
+            #white
+            rgba: 1,1,1,1
+        Rectangle:
+            pos:popup.center_x - 170, popup.y + 55
+            size: (root.value_progress * 340), 15
+
+    GridLayout:
+        cols:1
+        rows:1
+        background_color: 0,0,0,1
+        FloatLayout:
+            Image:
+                source: "icons/waiting.png"
+                size_hint: None, None
+                center_x: popup.center_x
+                center_y: popup.center_y + 80
+            # Label:
+            #     id: modal_question
+            #     markup: True
+            #     size_hint: None, None
+            #     text: '[size=30]' + root.body
+            #     text_size: 600, None
+            #     valign: 'middle'
+            #     halign: 'center'
+            #     shorten: True
+            #     width: 600
+            #     x:popup.x
+            #     center_x: popup.center_x
+            #     center_y: popup.center_y - 20
+
+            Label:
+                id: modal_question
+                markup: True
+                size_hint: None, None
+                text: "[size=30]" + root.body + '[/size]'
+                valign: 'middle'
+                halign: 'center'
+                center_x: popup.center_x
+                center_y: popup.center_y - 60
+
 <MainScreen>:
     name: 'main'
     background_color: 0,0,0,1
