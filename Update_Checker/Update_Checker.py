@@ -9,7 +9,7 @@ import logging
 
 class Update_Checker():
     """docstring for Update_Checker"""
-    def __init__(self, versioning_path=None, pipe=None):
+    def __init__(self, versioning_path='/home/pi/roboOS.txt', pipe=None):
         logging.basicConfig(filename='/home/pi/update_script.log', level=logging.DEBUG)
         logging.info('Update_Checker imported')
 
@@ -109,10 +109,19 @@ class Update_Checker():
 
         logging.info("Desires an update: {}".format(self.needed_updates))
 
+    def render_gui(self):
+        # make Kivy_Popup_Updater discoverable
+        import sys
+        sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+        from Kivy_Popup_Updater.main import Updater_App
+        Updater_App().run()
+
     def execute_updates(self):
         if len(self.needed_updates) != 0:
-            #turn off octoprint and bring up error screen
-            subprocess.call("sudo bash " + self.current_path + "/../octoprint_takeover.sh", shell=True)
+            from multiprocessing import Process, Array
+            gui = Process(target=self.render_gui, args=())
+            print "#### STARTING GUI!!!"
+            gui.start()
 
             #update all pending updates
             print("These need updating:")

@@ -40,6 +40,9 @@ import subprocess
 
 from popup_screen import Updating_Popup
 
+DIR_PATH = os.path.dirname(os.path.realpath(__file__))
+resource_add_path(DIR_PATH)
+
 class Updater_Screen_Manager(ScreenManager):
     def __init__(self,**kwargs):
         super(Updater_Screen_Manager, self).__init__(**kwargs)
@@ -50,15 +53,12 @@ class MainScreen(Screen):
     def __init__(self,**kwargs):
         super(MainScreen, self).__init__(**kwargs)
         poppy = Updating_Popup()
-        
 
 
 class Updater_App(App):
 
     def build(self):
-
+        Logger.info('Build called...')
         sm = Builder.load_file('updater.kv')
-        print("Opening Up Update Screen")
+        Logger.info("Opening Up Update Screen")
         return sm
-
-Updater_App().run()
