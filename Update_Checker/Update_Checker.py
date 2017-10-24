@@ -118,17 +118,21 @@ class Update_Checker():
 
     def execute_updates(self):
         if len(self.needed_updates) != 0:
+            # RENDER GUI
             from multiprocessing import Process, Array
             # progress = [number of updates executed, total number of needed updates]
             progress = Array('i', [0,len(self.needed_updates)])
             gui = Process(target=self.render_gui, args=(progress,))
-            print "#### STARTING GUI!!!"
+            logging.info("#### STARTING GUI!!!")
             gui.start()
+            # KILL OCTOPRINT
+            ec = subprocess.call(['sudo', 'pkill', '-9', 'octoprint'])
+            logging.info("exit code for killing octoprint: {}".format(ec))
 
             #update all pending updates
-            print("These need updating:")
+            logging.info("These need updating:")
             for update in self.needed_updates:
-                print("\t" + update)
+                logging.info("\t" + update)
 
             exit_codes = []
             for update in self.needed_updates:

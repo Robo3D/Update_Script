@@ -59,9 +59,14 @@ class Updater_App(App):
     def __init__(self, *args, **kwargs):
         super(Updater_App, self).__init__(*args, **kwargs)
         self.update_progress = kwargs['progress']
+        Logger.info('THIS IS THE DIR_PATH::: {}'.format(DIR_PATH))
 
     def build(self):
-        Logger.info('Build called...')
-        sm = Builder.load_file('updater.kv')
-        Logger.info("Opening Up Update Screen")
-        return sm
+        try:
+            Logger.info('Build called...')
+            sm = Builder.load_file('updater.kv')
+            Logger.info("Opening Up Update Screen")
+        except Exception as e:
+            Logger.info(str(e))
+        else:
+            return sm
