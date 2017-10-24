@@ -28,16 +28,20 @@ class USB_Progress_Popup(ModalView):
         super(USB_Progress_Popup,self).__init__(**kwargs)
         self.app_instance = App.get_running_app()
         self.open()
-        Clock.schedule_interval(self.update, 0.75)
+        Clock.schedule_interval(self.update, 0.25)
+
 
     def update(self,dt):
         self.exec_updates = self.app_instance.update_progress[0]
         self.total_updates = self.app_instance.update_progress[1]
-        real_percent_float = float(self.exec_updates)/float(self.total_updates)
-        if real_percent_float <= self.value_progress and real_percent_float < 1.0:
-            self.value_progress += 0.01
-        else:
-            self.value_progress = real_percent_float
+        current_percent = float(self.exec_updates)/float(self.total_updates)
+        next_percent = float(self.exec_updates + 1)/float(self.total_updates)
 
-        Logger.info('{}'.format(real_percent_float))
+        within_range = current_percent <= self.value_progress < next_percent
+        if within_range and int(current_percent) is not 1:
+            self.value_progress += 0.005
+        elif current_percent > self.value_progress:
+            self.value_progress = current_percent
+        else:
+            pass
         Logger.info('displayed: {}'.format(self.value_progress))
