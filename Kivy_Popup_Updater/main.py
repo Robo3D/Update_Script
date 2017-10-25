@@ -52,7 +52,7 @@ class Updater_Screen_Manager(ScreenManager):
 class MainScreen(Screen):
     def __init__(self,**kwargs):
         super(MainScreen, self).__init__(**kwargs)
-        poppy = USB_Progress_Popup()
+        poppy = Updating_Popup()
 
 
 class Updater_App(App):
