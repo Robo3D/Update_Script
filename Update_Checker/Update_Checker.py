@@ -112,7 +112,9 @@ class Update_Checker():
     def render_gui(self, progress):
         # make Kivy_Popup_Updater discoverable
         import sys
-        sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+        path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        sys.path.append(path)
+        logging.info("PATH to GUI: {}".format(path))
         from Kivy_Popup_Updater.main import Updater_App
         Updater_App(progress=progress).run()
 
@@ -126,8 +128,8 @@ class Update_Checker():
             logging.info("#### STARTING GUI!!!")
             gui.start()
             # KILL OCTOPRINT
-            ec = subprocess.call(['sudo', 'pkill', '-9', 'octoprint'])
-            logging.info("exit code for killing octoprint: {}".format(ec))
+            # ec = subprocess.call(['sudo', 'pkill', '-9', 'octoprint'])
+            # logging.info("exit code for killing octoprint: {}".format(ec))
 
             #update all pending updates
             logging.info("These need updating:")
