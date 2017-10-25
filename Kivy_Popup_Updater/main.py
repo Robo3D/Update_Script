@@ -64,6 +64,7 @@ class Updater_App(App):
     def build(self):
         try:
             Logger.info('Build called...')
+            Logger.info('Loading file: {}'.format(DIR_PATH+'/updater.kv'))
             sm = Builder.load_file(DIR_PATH+'/updater.kv')
             Logger.info("Opening Up Update Screen")
         except Exception as e:
