@@ -19,7 +19,14 @@ Config.set('kivy', 'keyboard_mode', 'dock')
 Config.set('graphics', 'height', '320')
 Config.set('graphics', 'width', '480')
 Config.set('graphics', 'borderless', '1')
-Config.set('input', '%(name)s', 'probesysfs,provider=hidinput,param=rotation=270,param=invert_y=1')
+from detect_model import detect_model
+model = detect_model('/home/pi/.octoprint/config.yaml')
+if model == 'c2hdmi':
+    Config.set('input', '%(name)s', 'probesysfs,provider=hidinput,param=rotation=180,param=invert_y=1,param=invert_x=1')
+elif model == 'c2':
+    Config.set('input', '%(name)s', 'probesysfs,provider=hidinput,param=rotation=270,param=invert_y=1')
+else:
+    Config.set('input', '%(name)s', 'probesysfs,provider=hidinput,param=invert_x=1')
 
 from kivy.app import App
 from kivy.lang import Builder
