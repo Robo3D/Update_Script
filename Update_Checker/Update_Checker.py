@@ -117,7 +117,8 @@ class Update_Checker():
     def execute_updates(self):
         if len(self.needed_updates) != 0:
             # turn off octoprint and Call up GUI app
-            code = subprocess.call("sudo bash " + self.current_path + "/../octoprint_takeover.sh", shell=True)
+            cmd = ['sudo', '/bin/bash', self.current_path + "/../octoprint_takeover.sh"]
+            code = subprocess.call(cmd, shell=True)
             logging.info('THIS IS THE CODE:::: {}'.format(code))
 
             #update all pending updates
@@ -150,7 +151,7 @@ class Update_Checker():
 
             success_count = exit_codes.count(0)
             failed_count = exit_codes.count(1)
-            count_msg = 'Success: {} Failed: {}'.format(success_count, failed_count)
+            count_msg = 'Total: {} Success: {} Failed: {}'.format(exit_codes, success_count, failed_count)
             logging.info(count_msg)
             if 1 in exit_codes:
                 logging.info('Failed detected... Not updating version.')
