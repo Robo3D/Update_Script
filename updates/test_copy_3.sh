@@ -1,6 +1,6 @@
 #! /bin/sh
 
-sleep 10
+sleep 2
 
 #store that the update has occured
 # echo ${0##*/} >> /home/pi/.updates.txt

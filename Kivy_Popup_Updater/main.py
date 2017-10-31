@@ -38,7 +38,7 @@ from kivy.core.window import Window
 from kivy.clock import Clock
 import subprocess
 
-from popup_screen import Updating_Popup, USB_Progress_Popup
+from popup_screen import USB_Progress_Popup, UpdateStats, Failed_Updating_Popup, Restarting_Popup
 
 DIR_PATH = os.path.dirname(os.path.realpath(__file__))
 resource_add_path(DIR_PATH)
@@ -52,8 +52,27 @@ class Updater_Screen_Manager(ScreenManager):
 class MainScreen(Screen):
     def __init__(self,**kwargs):
         super(MainScreen, self).__init__(**kwargs)
-        poppy = USB_Progress_Popup()
+        self.prog_poppy = USB_Progress_Popup()
+        self.prog_poppy.open()
+        self.failed_poppy = Failed_Updating_Popup()
+        self.check_stats = Clock.schedule_interval(self.update, 0.5)
 
+    def update(self,dt):
+        is_complete = int(self.prog_poppy.current_percent) is 1
+        any_failures = self.prog_poppy.update_stats.failed > 0
+        if is_complete:
+            Logger.info("Update completed...")
+            if any_failures:
+                Logger.info("...Failed detected!")
+                self.failed_poppy.open()
+                self.prog_poppy.dismiss()
+                Clock.unschedule(self.check_stats)
+            else:
+                Logger.info("...No failed detected!")
+                r = Restarting_Popup()
+                r.open()
+                self.prog_poppy.dismiss()
+            Clock.unschedule(self.prog_poppy.sched_update)
 
 class Updater_App(App):
 

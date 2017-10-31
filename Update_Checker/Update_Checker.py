@@ -109,9 +109,9 @@ class Update_Checker():
 
         logging.info("Desires an update: {}".format(self.needed_updates))
 
-    def write_to_progress(self,executed, total):
+    def write_to_progress(self, executed, total, failure):
         with open('/home/pi/.progress', 'wb') as f:
-            line = '{}/{}'.format(executed,total)
+            line = '{},{},{}'.format(executed,total,failure)
             f.write(line)
 
     def execute_updates(self):
@@ -126,14 +126,22 @@ class Update_Checker():
                 logging.info("\t" + update)
 
             len_needed_updates = len(self.needed_updates)
-            self.write_to_progress(0, len_needed_updates)
+            self.write_to_progress(
+                executed=0,
+                total=len_needed_updates,
+                failure=0
+            )
             exit_codes = []
             for update in self.needed_updates:
                 print("Executing " + update)
                 logging.info("Start... package: {}".format(update))
                 ec = subprocess.call(["sudo bash "+ self.updates_path + update], shell=True)
                 exit_codes.append(ec)
-                self.write_to_progress(len(exit_codes), len_needed_updates)
+                self.write_to_progress(
+                    executed=len(exit_codes),
+                    total=len_needed_updates,
+                    failure=ec
+                )
                 if ec is 0:
                     logging.info("Complete... package: {}".format(update))
                 else:
