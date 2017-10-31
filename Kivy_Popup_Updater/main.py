@@ -52,14 +52,10 @@ class Updater_Screen_Manager(ScreenManager):
 class MainScreen(Screen):
     def __init__(self,**kwargs):
         super(MainScreen, self).__init__(**kwargs)
-        poppy = Updating_Popup()
+        poppy = USB_Progress_Popup()
 
 
 class Updater_App(App):
-    def __init__(self, *args, **kwargs):
-        super(Updater_App, self).__init__(*args, **kwargs)
-        self.update_progress = kwargs['progress']
-        Logger.info('THIS IS THE DIR_PATH::: {}'.format(DIR_PATH))
 
     def build(self):
         try:
@@ -71,3 +67,6 @@ class Updater_App(App):
             Logger.info(str(e))
         else:
             return sm
+
+if __name__ == '__main__':
+    Updater_App().run()

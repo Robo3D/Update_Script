@@ -109,40 +109,31 @@ class Update_Checker():
 
         logging.info("Desires an update: {}".format(self.needed_updates))
 
-    def render_gui(self, progress):
-        # make Kivy_Popup_Updater discoverable
-        import sys
-        path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        sys.path.append(path)
-        logging.info("PATH to GUI: {}".format(path))
-        from Kivy_Popup_Updater.main import Updater_App
-        Updater_App(progress=progress).run()
+    def write_to_progress(self,executed, total):
+        with open('/home/pi/.progress', 'wb') as f:
+            line = '{}/{}'.format(executed,total)
+            f.write(line)
 
     def execute_updates(self):
         if len(self.needed_updates) != 0:
-            # RENDER GUI
-            from multiprocessing import Process, Array
-            # progress = [number of updates executed, total number of needed updates]
-            progress = Array('i', [0,len(self.needed_updates)])
-            gui = Process(target=self.render_gui, args=(progress,))
-            logging.info("#### STARTING GUI!!!")
-            gui.start()
-            # KILL OCTOPRINT
-            # ec = subprocess.call(['sudo', 'pkill', '-9', 'octoprint'])
-            # logging.info("exit code for killing octoprint: {}".format(ec))
+            # turn off octoprint and Call up GUI app
+            code = subprocess.call("sudo bash " + self.current_path + "/../octoprint_takeover.sh", shell=True)
+            logging.info('THIS IS THE CODE:::: {}'.format(code))
 
             #update all pending updates
             logging.info("These need updating:")
             for update in self.needed_updates:
                 logging.info("\t" + update)
 
+            len_needed_updates = len(self.needed_updates)
+            self.write_to_progress(0, len_needed_updates)
             exit_codes = []
             for update in self.needed_updates:
                 print("Executing " + update)
                 logging.info("Start... package: {}".format(update))
                 ec = subprocess.call(["sudo bash "+ self.updates_path + update], shell=True)
                 exit_codes.append(ec)
-                progress[0] = len(exit_codes)
+                self.write_to_progress(len(exit_codes), len_needed_updates)
                 if ec is 0:
                     logging.info("Complete... package: {}".format(update))
                 else:
