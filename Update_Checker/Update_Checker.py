@@ -117,8 +117,8 @@ class Update_Checker():
     def execute_updates(self):
         if len(self.needed_updates) != 0:
             # turn off octoprint and Call up GUI app
-            cmd = ['sudo', '/bin/bash', self.current_path + "/../octoprint_takeover.sh"]
-            code = subprocess.call(cmd, shell=True)
+            # cmd = ['sudo', '/bin/bash', self.current_path + "/../octoprint_takeover.sh"]
+            code = subprocess.call("sudo bash " + self.current_path + "/../octoprint_takeover.sh", shell=True)
             logging.info('THIS IS THE CODE:::: {}'.format(code))
 
             #update all pending updates
