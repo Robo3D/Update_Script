@@ -9,11 +9,11 @@ import logging
 
 class Update_Checker():
     """docstring for Update_Checker"""
-    def __init__(self, versioning_path=None, pipe=None):
+    def __init__(self, versioning_path='/home/pi/roboOS.txt', pipe=None):
         logging.basicConfig(filename='/home/pi/update_script.log', level=logging.DEBUG)
         logging.info('Update_Checker imported')
 
-        self.version = '1.8.1-c2.0'
+        self.version = '1.8.1-r2.1'
         self.current_path = os.path.dirname(os.path.realpath(__file__))
         print("Current Directory is: " + self.current_path)
 
@@ -109,30 +109,59 @@ class Update_Checker():
 
         logging.info("Desires an update: {}".format(self.needed_updates))
 
+    def write_to_progress(self, executed, total, failure):
+        with open('/home/pi/.progress', 'wb') as f:
+            line = '{},{},{}'.format(executed,total,failure)
+            f.write(line)
+
+    def ensure_rrus_is_last(self):
+        self.needed_updates.append(
+            self.needed_updates.pop(
+                self.needed_updates.index(
+                    'remoteupdatesystem.sh'
+                )
+            )
+        )
+
     def execute_updates(self):
         if len(self.needed_updates) != 0:
-            #turn off octoprint and bring up error screen
-            subprocess.call("sudo bash " + self.current_path + "/../octoprint_takeover.sh", shell=True)
+            self.ensure_rrus_is_last()
+            # turn off octoprint and Call up GUI app
+            # cmd = ['sudo', '/bin/bash', self.current_path + "/../octoprint_takeover.sh"]
+            code = subprocess.call("sudo bash " + self.current_path + "/../octoprint_takeover.sh", shell=True)
+            logging.info('THIS IS THE CODE:::: {}'.format(code))
 
             #update all pending updates
-            print("These need updating:")
+            logging.info("These need updating:")
             for update in self.needed_updates:
-                print("\t" + update)
+                logging.info("\t" + update)
 
+            len_needed_updates = len(self.needed_updates)
+            self.write_to_progress(
+                executed=0,
+                total=len_needed_updates,
+                failure=0
+            )
             exit_codes = []
             for update in self.needed_updates:
                 print("Executing " + update)
                 logging.info("Start... package: {}".format(update))
                 ec = subprocess.call(["sudo bash "+ self.updates_path + update], shell=True)
                 exit_codes.append(ec)
+                self.write_to_progress(
+                    executed=len(exit_codes),
+                    total=len_needed_updates,
+                    failure=ec
+                )
                 if ec is 0:
                     logging.info("Complete... package: {}".format(update))
                 else:
                     logging.info("Failed... package: {}".format(update))
 
+
             success_count = exit_codes.count(0)
             failed_count = exit_codes.count(1)
-            count_msg = 'Success: {} Failed: {}'.format(success_count, failed_count)
+            count_msg = 'Total: {} Success: {} Failed: {}'.format(exit_codes, success_count, failed_count)
             logging.info(count_msg)
             if 1 in exit_codes:
                 logging.info('Failed detected... Not updating version.')
