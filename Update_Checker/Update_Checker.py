@@ -114,18 +114,18 @@ class Update_Checker():
             line = '{},{},{}'.format(executed,total,failure)
             f.write(line)
 
-    def ensure_rrus_is_last(self):
-        self.needed_updates.append(
-            self.needed_updates.pop(
-                self.needed_updates.index(
-                    'remoteupdatesystem.sh'
-                )
-            )
-        )
+    # def ensure_rrus_is_last(self):
+    #     self.needed_updates.append(
+    #         self.needed_updates.pop(
+    #             self.needed_updates.index(
+    #                 'remoteupdatesystem.sh'
+    #             )
+    #         )
+    #     )
 
     def execute_updates(self):
         if len(self.needed_updates) != 0:
-            self.ensure_rrus_is_last()
+            # self.ensure_rrus_is_last()
             # turn off octoprint and Call up GUI app
             # cmd = ['sudo', '/bin/bash', self.current_path + "/../octoprint_takeover.sh"]
             code = subprocess.call("sudo bash " + self.current_path + "/../octoprint_takeover.sh", shell=True)
