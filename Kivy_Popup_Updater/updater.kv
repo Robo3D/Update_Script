@@ -1,4 +1,46 @@
-<Updating_Popup>:
+<Failed_Updating_Popup>:
+    background_color: 0,0,0,1
+    id: popup
+    size_hint_x: None
+    size_hint_y: None
+    size: 600, 400
+    auto_dismiss: False
+    canvas.after:
+        Color:
+            rgba: 0.41,0.7,0.91,1
+        Line:
+            cap: 'round'
+            joint: 'round'
+            close: False
+            width: 3
+            points: popup.x, popup.y, popup.x, popup.y + 400, popup.x + 600, popup.y + 400, popup.x + 600, popup.y, popup.x,popup.y
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 0, 10, 0 ,0
+
+        Image:
+            size_hint_y: 0.5
+            source: 'icons/failure_icon.png'
+
+        Label:
+            id: modal_question
+            markup: True
+            text: '[size=40][color=#69B3E7]Update Failed[/size][/color]\n[size=30]Please restart the printer and try again.[/size]'
+            valign: 'middle'
+            halign: 'center'
+
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint_y: 0.6
+            spacing: 25
+            padding: 175, 15, 175, 15
+            Button:
+                markup: True
+                text: "[size=30]Restart[/size]"
+                background_normal: 'icons/blue_button_style.png'
+                on_press: root.reboot()
+
+<Restarting_Popup>:
     background_color: 0,0,0,1
     id: popup
     size_hint_x: None
@@ -23,16 +65,69 @@
                 source: 'icons/failure_icon.png'
                 size_hint: None, None
                 center_x: popup.center_x
-                center_y: popup.center_y + 110
+                center_y: popup.center_y + 80
             Label:
                 id: modal_question
                 markup: True
                 size_hint: None, None
-                text: '[size=40][color=#69B3E7]Robo is Updating[/size][/color]\n\n[size=30]Your printer will restart after the\nupdate is finished\n\n[color=#FF0000]Please do not turn off the printer[/color][/size]'
+                text: '[size=40][color=#69B3E7]Restarting[/size][/color]\n[size=30]Please wait.[/size]'
                 valign: 'middle'
                 halign: 'center'
                 center_x: popup.center_x
                 center_y: popup.center_y - 50
+
+
+<USB_Progress_Popup>:
+    background_color: 0,0,0,1
+    id: popup
+    size_hint_x: None
+    size_hint_y: None
+    size: 600, 400
+    auto_dismiss: False
+    canvas.after:
+        Color:
+            rgba: 0.41,0.7,0.91,1
+        Line:
+            cap: 'round'
+            joint: 'round'
+            close: False
+            width: 3
+            points: popup.x, popup.y, popup.x, popup.y + 400, popup.x + 600, popup.y + 400, popup.x + 600, popup.y, popup.x,popup.y
+        #progress bar
+        Color:
+            #grey 3B3E45
+            rgba: 0.231372549,0.243137255,0.270588235,1
+        Rectangle:
+            id:progress_outline
+            pos:popup.center_x - 175, popup.y + 50
+            size: 350, 25
+
+        Color:
+            #white
+            rgba: 1,1,1,1
+        Rectangle:
+            pos:popup.center_x - 170, popup.y + 55
+            size: (root.value_progress * 340), 15
+
+    GridLayout:
+        cols:1
+        rows:1
+        background_color: 0,0,0,1
+        FloatLayout:
+            Image:
+                source: "icons/waiting.png"
+                size_hint: None, None
+                center_x: popup.center_x
+                center_y: popup.center_y + 80
+            Label:
+                id: modal_question
+                markup: True
+                size_hint: None, None
+                text: "[size=30]" + root.body + '[/size]'
+                valign: 'middle'
+                halign: 'center'
+                center_x: popup.center_x
+                center_y: popup.center_y - 60
 
 <MainScreen>:
     name: 'main'
