@@ -126,6 +126,7 @@ class Update_Checker():
     def execute_updates(self):
         if len(self.needed_updates) != 0:
             # self.ensure_rrus_is_last()
+            self.needed_updates.sort()
             # turn off octoprint and Call up GUI app
             # cmd = ['sudo', '/bin/bash', self.current_path + "/../octoprint_takeover.sh"]
             code = subprocess.call("sudo bash " + self.current_path + "/../octoprint_takeover.sh", shell=True)
