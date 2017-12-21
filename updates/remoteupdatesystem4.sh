@@ -14,15 +14,13 @@ verify_success () {
   fi
 }
 
-task="[Task]:: Starting roboRemoteUpdateSystem in 15 seconds..."
+
+cd $THIS_DIR &>> $LOG
+task="[Task]:: Running playbook..."
 echo $task &>> $LOG
-sudo service roboRemoteUpdateSystem start &>> $LOG
-# give RRUS time to start up
-for i in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
-do
-  sleep 1
-  echo $i &>> $LOG
-done
+chmod +x $THIS_DIR/../assets/run_playbook.py &>> $LOG
+$USER_PI /home/pi/oprint/bin/python $THIS_DIR/../assets/run_playbook.py &>> $LOG
+verify_success $? $task
 
 echo "Finishing up..." &>> $LOG
 #store that the update has occured

@@ -14,11 +14,15 @@ verify_success () {
   fi
 }
 
-task="[Task]:: Install compliant RoboLCD version..."
+task="[Task]:: Starting roboRemoteUpdateSystem in 15 seconds..."
 echo $task &>> $LOG
-cd $THIS_DIR &>> $LOG
-$USER_PI /home/pi/oprint/bin/pip install https://github.com/victorevector/RoboLCD/archive/RRUSpub.zip
-verify_success $? $task
+sudo service roboRemoteUpdateSystem start &>> $LOG
+# give RRUS time to start up
+for i in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
+do
+  sleep 1
+  echo $i &>> $LOG
+done
 
 echo "Finishing up..." &>> $LOG
 #store that the update has occured
