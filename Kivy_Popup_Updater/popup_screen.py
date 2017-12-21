@@ -57,7 +57,7 @@ class USB_Progress_Popup(ModalView):
 
         within_range = self.current_percent <= self.value_progress < next_percent
         if within_range and int(self.current_percent) is not 1:
-            self.value_progress += 0.005
+            self.value_progress += 0.001
         elif self.current_percent > self.value_progress:
             self.value_progress = self.current_percent
         else:
