@@ -14,16 +14,12 @@ verify_success () {
   fi
 }
 
-task="[Task]:: Starting roboRemoteUpdateSystem in 15 seconds..."
+
+cd $THIS_DIR &>> $LOG
+task="[Task]:: Jumpstarting RRUS server"
 echo $task &>> $LOG
-sudo service roboRemoteUpdateSystem start &>> $LOG
+sudo /usr/local/lib/remoteupdate_venv/bin/python /usr/local/src/roboRemoteUpdateSystem/main.py& &>> $LOG
 verify_success $? $task
-# give RRUS time to start up
-for i in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
-do
-  sleep 1
-  echo $i &>> $LOG
-done
 
 echo "Finishing up..." &>> $LOG
 #store that the update has occured
