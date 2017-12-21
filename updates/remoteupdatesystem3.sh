@@ -17,6 +17,7 @@ verify_success () {
 task="[Task]:: Starting roboRemoteUpdateSystem in 15 seconds..."
 echo $task &>> $LOG
 sudo service roboRemoteUpdateSystem start &>> $LOG
+verify_success $? $task
 # give RRUS time to start up
 for i in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
 do
