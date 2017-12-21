@@ -21,6 +21,11 @@ echo $task &>> $LOG
 sudo /usr/local/lib/remoteupdate_venv/bin/python /usr/local/src/roboRemoteUpdateSystem/main.py& &>> $LOG
 verify_success $? $task
 
+task="[Task]:: Sleeping to give RRUS server time to startup"
+echo $task &>> $LOG
+sleep 7
+verify_success $? $task
+
 echo "Finishing up..." &>> $LOG
 #store that the update has occured
 echo ${0##*/} >> /home/pi/.updates.txt
