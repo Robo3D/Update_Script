@@ -14,10 +14,16 @@ verify_success () {
   fi
 }
 
-task="[Task]:: Install compliant RoboLCD version..."
-echo $task &>> $LOG
+
 cd $THIS_DIR &>> $LOG
-$USER_PI /home/pi/oprint/bin/pip install https://github.com/victorevector/RoboLCD/archive/RRUSpub.zip
+task="[Task]:: Jumpstarting RRUS server"
+echo $task &>> $LOG
+sudo /usr/local/lib/remoteupdate_venv/bin/python /usr/local/src/roboRemoteUpdateSystem/main.py& &>> $LOG
+verify_success $? $task
+
+task="[Task]:: Sleeping to give RRUS server time to startup"
+echo $task &>> $LOG
+sleep 7
 verify_success $? $task
 
 echo "Finishing up..." &>> $LOG
