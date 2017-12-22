@@ -164,7 +164,7 @@ class Update_Checker():
             failed_count = exit_codes.count(1)
             count_msg = 'Total: {} Success: {} Failed: {}'.format(exit_codes, success_count, failed_count)
             logging.info(count_msg)
-            if 1 in exit_codes:
+            if failed_count > 0:
                 logging.info('Failed detected... Not updating version.')
             else:
                 logging.info("Updating Version...")
