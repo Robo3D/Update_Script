@@ -44,7 +44,7 @@ class Restarting_Popup(ModalView):
 class USB_Progress_Popup(ModalView):
     current_percent = NumericProperty(0.0)
     value_progress = NumericProperty(0.0)
-    body = StringProperty('Your printer will restart after the\nupdate is finished.\n[size=25][color=#FF0000]Please do not turn the printer off.[/color][/size]')
+    body = StringProperty('Your printer will restart after the\n2 part update is finished.\n[size=25][color=#FF0000]Please do not turn the printer off.[/color][/size]')
 
     def __init__(self,**kwargs):
         super(USB_Progress_Popup,self).__init__(**kwargs)
