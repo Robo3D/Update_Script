@@ -4,9 +4,23 @@ VENV="oprint"
 OCTO_DIR=$HOME_DIR/OctoPrint
 USER_PI="sudo -u pi"
 
+LOG=/home/pi/.octoprint/logs/update_info.log
+
+verify_success () {
+  if [ $1 -eq 0 ]; then
+    echo "$2 ...success" &>> $LOG
+  else
+    echo "$2 ...failure" &>> $LOG
+    exit 1
+  fi
+}
+
 ######octoprint plugins #######
 install_plugin () {
+    task="[Task]:: Installing "$1
+    echo $task &>> $LOG
     $USER_PI $HOME_DIR/$VENV/bin/pip install $1
+    verify_success $? $task
 }
 
 #Custom Controls Plugin
@@ -30,14 +44,6 @@ install_plugin "https://github.com/Robo3D/OctoPrint-Stats/archive/1.0.1.zip"
 #Request Spinner
 install_plugin "https://github.com/Robo3D/OctoPrint-RequestSpinner/archive/0.1.2.zip"
 
-#kaa print event
-install_plugin "https://github.com/Robo3D/Kaa_Printevent/archive/0.1.0.zip"
-
-#lani
-# install_plugin "https://github.com/mikerybka/OctoPrint-Lani/archive/master.zip"
-
-#Alexa
-install_plugin "https://github.com/Robo3D/Octoprint_Alexa/archive/0.1.3.zip"
 
 
 

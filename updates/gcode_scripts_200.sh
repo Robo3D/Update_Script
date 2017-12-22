@@ -1,5 +1,9 @@
 #!/bin/bash
+
+THIS_DIR=`dirname $0`
+USER_PI="sudo -u pi"
 LOG=/home/pi/.octoprint/logs/update_info.log
+
 verify_success () {
   if [ $1 -eq 0 ]; then
     echo "$2 ...success" &>> $LOG
@@ -9,9 +13,9 @@ verify_success () {
   fi
 }
 
-task="[Task]:: Expand fs..."
+task="[Task]:: Installing gcode_cmds"
 echo $task &>> $LOG
-sudo /usr/bin/raspi-config --expand-rootfs
+$USER_PI cp -a $THIS_DIR/../assets/gcode_scripts/. /home/pi/.octoprint/scripts/gcode/
 verify_success $? $task
 
 #store that the update has occured
