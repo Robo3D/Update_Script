@@ -15,7 +15,7 @@ G4 S2
 ; move bed down 15mm
 G1 Z15 F300
 ; move to front left corner
-G1 X1 Y1 F7200
+G1 X10 Y1 F7200
 ; heat to priming line temp
 M109 S210
 ; move bed to printing position
