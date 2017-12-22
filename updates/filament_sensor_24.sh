@@ -3,7 +3,7 @@ HOME_DIR="/home/pi"
 VENV="oprint"
 USER_PI="sudo -u pi"
 THIS_DIR=`dirname $0`
-LOG=/home/pi/.octoprint/logs/update_info.txt
+LOG=/home/pi/.octoprint/logs/update_info.log
 
 verify_success () {
   if [ $1 -eq 0 ]; then

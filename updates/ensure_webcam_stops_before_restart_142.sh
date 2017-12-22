@@ -5,7 +5,7 @@ VENV="oprint"
 THIS_DIR=`dirname $0`
 OCTO_DIR=$HOME_DIR/OctoPrint
 USER_PI="sudo -u pi"
-LOG=/home/pi/.octoprint/logs/update_info.txt
+LOG=/home/pi/.octoprint/logs/update_info.log
 
 verify_success () {
   if [ $1 -eq 0 ]; then

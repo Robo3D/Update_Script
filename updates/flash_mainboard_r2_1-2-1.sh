@@ -3,7 +3,7 @@
 THIS_DIR=`dirname $0`
 RRUS_DIR=$THIS_DIR/../roboRemoteUpdateSystem
 USER_PI="sudo -u pi"
-LOG=/home/pi/.octoprint/logs/update_info.txt
+LOG=/home/pi/.octoprint/logs/update_info.log
 ERASEEEPROMHEX="EEPROM_ERASE.ino.hex"
 HEXFILE="Marlin.R2.1.2.1.hex"
 SERIAL_PATH="/dev/ttyACM0"
