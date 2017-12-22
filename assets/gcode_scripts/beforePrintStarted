@@ -9,10 +9,8 @@ M107
 ;non blocking heatup of extruder and bed
 M104 S230
 M140 S60
-; home all axis
-G28
-; probe for bed autolevel plane
-G29
+; robo leveling algorithm
+G36
 ; pause for 2 seconds
 G4 S2
 ; move bed down 15mm
