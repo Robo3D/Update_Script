@@ -36,8 +36,9 @@ class Restarting_Popup(ModalView):
         Clock.schedule_once(self.restart, 1)
 
     def restart(self, dt):
-        Logger.info("RESTARTING!!!")
-        subprocess.call(['sudo', 'reboot'])
+        Logger.info("Supposed to Restart.... defer to RRUS")
+        exit(0)
+        # subprocess.call(['sudo', 'reboot'])
 
 
 class USB_Progress_Popup(ModalView):

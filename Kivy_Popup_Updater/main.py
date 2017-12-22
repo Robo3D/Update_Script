@@ -76,10 +76,12 @@ class MainScreen(Screen):
                 Clock.unschedule(self.check_stats)
             else:
                 Logger.info("...No failed detected!")
-                r = Restarting_Popup()
-                r.open()
-                self.prog_poppy.dismiss()
+                Logger.info("Supposed to Restart.... defer to RRUS")
+                # r = Restarting_Popup()
+                # r.open()
+                # self.prog_poppy.dismiss()
             Clock.unschedule(self.prog_poppy.sched_update)
+            exit(0)
 
 class Updater_App(App):
 
