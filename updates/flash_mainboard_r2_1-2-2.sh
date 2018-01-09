@@ -12,7 +12,7 @@ install_plugin () {
 }
 
 
-# #AVRDUDE
+#AVRDUDE
 SERIAL_PATH="/dev/ttyACM0"
 flash_arduino () {
      avrdude -p m2560 -c wiring -P $SERIAL_PATH -b 115200 -F -v -U flash:w:$1 -D
@@ -25,8 +25,14 @@ sudo pip install pyserial
 # #AVRDude
 apt-get install -y avrdude
 #flash the board
-cd $THIS_DIR/../assets
-flash_arduino Marlin.R2.1.1.7.hex
+cd $THIS_DIR/../assets/Hex_Assets
+
+#Erase EEPROM for 1.1.6 firmware. If this doesn't happen the user will get a nasty error that they will not be able to fix on their own.
+flash_arduino EEPROM_ERASE.hex
+#Let the Erase happen
+sleep 10
+#Flash the actual firmware
+flash_arduino Marlin.R2.1.2.2.hex
 
 #Ensure baudrate == 115200 in config.yaml
 $USER_PI $HOME_DIR/$VENV/bin/python replace_baudrate.py

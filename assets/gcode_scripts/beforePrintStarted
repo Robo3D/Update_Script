@@ -9,16 +9,14 @@ M107
 ;non blocking heatup of extruder and bed
 M104 S230
 M140 S60
-; home all axis
-G28
-; probe for bed autolevel plane
-G29
+; Robo Leveling
+G36
 ; pause for 2 seconds
 G4 S2
 ; move bed down 15mm
 G1 Z15 F300
 ; move to front left corner
-G1 X1 Y1 F7200
+G1 X10 Y1 F7200
 ; heat to priming line temp
 M109 S230
 M140 S60
