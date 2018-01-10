@@ -17,6 +17,9 @@ sudo chmod 0755 $ACL_DIRECTORY/roboacl.py
 #change ssh state to disabled
 systemctl disable ssh && touch $SSH_STATE_PATH
 
+#change the password for pi
+echo -e "$HOSTNAME\n$HOSTNAME" | sudo passwd pi
+
 #store that the update has occured
 echo ${0##*/} >> /home/pi/.updates.txt
 echo "Update Complete!"
