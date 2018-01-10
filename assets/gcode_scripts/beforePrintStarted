@@ -6,10 +6,9 @@ G90
 G92 E0
 ; turn off fans
 M107
-;non blocking heatup of extruder and bed
-M104 S230
-M140 S60
-; Robo Leveling
+;non blocking heatup of extruder
+M104 S210
+;Robo Leveling
 G36
 ; pause for 2 seconds
 G4 S2
@@ -18,12 +17,11 @@ G1 Z15 F300
 ; move to front left corner
 G1 X10 Y1 F7200
 ; heat to priming line temp
-M109 S230
-M140 S60
+M109 S210
 ; move bed to printing position
 G1 Z0.3
-; print 190mm priming line
-G1 X190 E15.0 F500
+; print 120mm priming line
+G1 X120 E15.0 F500
 ; move bed down
 G1 Z15 F300
 ; zero extruder

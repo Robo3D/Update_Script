@@ -1,34 +1,13 @@
-_description: Imported from HIGH.ini on 2017-04-22 00:25
-_display_name: high_quality
-bottom_layer_speed: 30
+_description: Imported from Low Quality Robo C2.ini on 2017-03-17 20:42
+_display_name: Low Quality Robo C2
+bottom_layer_speed: 10
 bottom_thickness: 0.3
 brim_line_count: 20
 cool_head_lift: false
 cool_min_feedrate: 19
 cool_min_layer_time: 7
 end_gcode:
-- 'G92 Z0
-
-  M104 S0                     ;extruder heater off
-
-  M140 S0                     ;heated bed heater off (if you have it)
-
-  G91                                    ;relative positioning
-
-  G1 E-1 F300                            ;retract the filament a bit before lifting
-  the nozzle, to release some of the pressure
-
-  G1 Z+0.5 E-5 X-20 Y-20 F{travel_speed} ;move Z up a bit and retract filament even
-  more
-
-  G28 X0 Y0                              ;move X/Y to min endstops, so the head is
-  out of the way
-
-  M84                         ;steppers off
-
-  G90                         ;absolute positioning
-
-  ;{profile_string}'
+- ''
 - ';End GCode
 
   M104 T0 S0                     ;extruder heater off
@@ -108,71 +87,63 @@ end_gcode:
 
   ;{profile_string}'
 fan_enabled: true
-fan_full_height: 6
-fan_speed: 50
+fan_full_height: 3
+fan_speed: 100
 fan_speed_max: 100
 filament_diameter:
 - 1.75
-- false
+- 1.75
 - false
 - false
 filament_flow: 100
-fill_density: 40
-fill_overlap: 15
-first_layer_width_factor: 100
+fill_density: 20
+fill_overlap: 10
+first_layer_width_factor: 300
 fix_horrible_extensive_stitching: false
 fix_horrible_union_all_type_a: true
 fix_horrible_union_all_type_b: false
 fix_horrible_use_open_bits: false
 follow_surface: false
-infill_speed: 60
+infill_speed: 50
 inner_shell_speed: 50
-layer_height: 0.1
+layer_height: 0.2
 object_sink: false
-ooze_shield: false
-outer_shell_speed: 40
+ooze_shield: true
+outer_shell_speed: 30
 overlap_dual: 0.15
 platform_adhesion: raft
-print_bed_temperature: 60
-print_speed: 40
+print_bed_temperature: 50
+print_speed: 50
 print_temperature:
+- 190
 - 190
 - false
 - false
-- false
-raft_airgap: 0.25
+raft_airgap: false
 raft_base_linewidth: 1.0
 raft_base_thickness: 0.3
-raft_interface_linewidth: 0.4
-raft_interface_thickness: 0.27
+raft_interface_linewidth: 0.6
+raft_interface_thickness: 0.2
 raft_line_spacing: 3.0
 raft_margin: 5.0
 raft_surface_layers: 2
 retraction_amount: true
-retraction_combing: true
-retraction_dual_amount: 16.5
+retraction_combing: all
+retraction_dual_amount: true
 retraction_enable: true
 retraction_hop: 0.075
-retraction_min_travel: 5
+retraction_min_travel: 7
 retraction_minimal_extrusion: 0.02
 retraction_speed: 40
-skirt_gap: 3.0
-skirt_line_count: 3
-skirt_minimal_length: 150.0
+skirt_gap: false
+skirt_line_count: false
+skirt_minimal_length: false
 solid_bottom: true
 solid_layer_thickness: 1.2
 solid_top: true
 spiralize: false
 start_gcode:
-- 'G28
-
-  G92 E0 ;
-
-  M565 Z-1 ;
-
-  G1 Z5 F5000 ;
-
-  G29 ;'
+- ''
 - ';Sliced at: {day} {date} {time}
 
   ;Basic settings: Layer height: {layer_height} Walls: {wall_thickness} Fill: {fill_density}
@@ -306,14 +277,14 @@ start_gcode:
   ;M109 T2 S{print_temperature2} ;Uncomment to add your own temperature line
 
   ;M109 T1 S{print_temperature2} ;Uncomment to add your own'
-support: everywhere
+support: none
 support_angle: 50
 support_dual_extrusion: both
-support_fill_rate: 15
+support_fill_rate: 25
 support_type: lines
 support_xy_distance: 0.7
 support_z_distance: 0.22
 travel_speed: 100
 wall_thickness: 1.2
-wipe_tower: false
+wipe_tower: true
 wipe_tower_volume: 15

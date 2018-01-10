@@ -1,1 +1,6 @@
-G1 Z{{ pause_position.z + 30 }}
+; set to relative mode
+G91
+; move bed down 10mm
+G1 Z10
+; set back to absolute mode
+G90

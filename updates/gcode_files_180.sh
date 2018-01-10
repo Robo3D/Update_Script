@@ -7,11 +7,11 @@ echo "adding new gcode files"
 
 #download .zip folder of assets
 cd $THIS_DIR/../assets/gcode_files/
-wget https://s3.amazonaws.com/roboupdate/assets/gcode_files.zip
+wget https://s3.amazonaws.com/roboupdate/assets/c2_gcode_files.zip
 
 #unzip all files to the uploads folder
-if [ -f "gcode_files.zip" ]; then
-    $USER_PI unzip -o gcode_files.zip -d $UPLOADS/ 
+if [ -f "c2_gcode_files.zip" ]; then
+    $USER_PI unzip -o c2_gcode_files.zip -d $UPLOADS/ 
     fi
 
 #store that the update has occured
