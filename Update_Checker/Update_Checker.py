@@ -50,6 +50,8 @@ class Update_Checker():
             versioning_path = v
         elif p_type is str:
             versioning_path = p
+        else:
+            versioning_path = None
 
         if v_type is tuple or v is None:
             pipe = v
@@ -59,7 +61,7 @@ class Update_Checker():
         return versioning_path, pipe
 
     def update_version(self):
-        if self.versioning_path:
+        if self.versioning_path != None and self.versioning_path:
             with open(self.versioning_path, 'w') as f:
                 f.write(self.version)
         else:
