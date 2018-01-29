@@ -32,7 +32,7 @@ flash_arduino EEPROM_ERASE.hex
 #Let the Erase happen
 sleep 10
 #Flash the actual firmware
-flash_arduino Marlin.C2.1.2.2.hex
+flash_arduino Marlin.C2.1.2.3.hex
 
 #Ensure baudrate == 115200 in config.yaml
 $USER_PI $HOME_DIR/$VENV/bin/python replace_baudrate.py
