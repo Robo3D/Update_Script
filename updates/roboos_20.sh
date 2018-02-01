@@ -13,10 +13,10 @@ install_plugin () {
 }
 
 #Install the new RoboLCD Version
-install_plugin "https://s3.amazonaws.com/roboupdate/repos/RoboLCD-1.1.8.zip"
+install_plugin "https://s3.amazonaws.com/roboupdate/repos/RoboLCD-1.11.9.zip"
 # Ensure dependencies got installed
 install_plugin "https://github.com/Robo3D/OctoPrint-FirmwareUpdater/archive/0.2.1.zip"
-install_plugin "https://github.com/Robo3D/roboOctoprint/archive/1.4.0-rc4.zip"
+install_plugin "https://github.com/Robo3D/roboOctoprint/archive/1.4.0-rc5.zip"
 install_plugin "https://github.com/Robo3D/Meta-Reader/archive/1.1.0.zip"
 install_plugin "https://github.com/Robo3D/Octoprint-Filament/archive/2.5.zip"
 
