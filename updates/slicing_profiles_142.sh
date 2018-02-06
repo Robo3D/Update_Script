@@ -14,8 +14,7 @@ rm $SLICING_DIR/low_quality.profile
 rm $SLICING_DIR/midpla.profile
 rm $SLICING_DIR/"normal_quality_(raft).profile"
 
-$USER_PI cp -a $THIS_DIR/../assets/slicing_profiles_r2/. $SLICING_DIR
-
+$USER_PI cp -a $THIS_DIR/../assets/slicing_profiles_c2/. $SLICING_DIR
 
 #store that the update has occured
 echo ${0##*/} >> /home/pi/.updates.txt
