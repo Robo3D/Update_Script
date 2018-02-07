@@ -7,28 +7,7 @@ cool_head_lift: false
 cool_min_feedrate: 19
 cool_min_layer_time: 7
 end_gcode:
-- 'G92 Z0
-
-  M104 S0                     ;extruder heater off
-
-  M140 S0                     ;heated bed heater off (if you have it)
-
-  G91                                    ;relative positioning
-
-  G1 E-1 F300                            ;retract the filament a bit before lifting
-  the nozzle, to release some of the pressure
-
-  G1 Z+0.5 E-5 X-20 Y-20 F{travel_speed} ;move Z up a bit and retract filament even
-  more
-
-  G28 X0 Y0                              ;move X/Y to min endstops, so the head is
-  out of the way
-
-  M84                         ;steppers off
-
-  G90                         ;absolute positioning
-
-  ;{profile_string}'
+- ''
 - ';End GCode
 
   M104 T0 S0                     ;extruder heater off
@@ -164,15 +143,7 @@ solid_layer_thickness: 1.2
 solid_top: true
 spiralize: false
 start_gcode:
-- 'G28
-
-  G92 E0 ;
-
-  M565 Z-1 ;
-
-  G1 Z5 F5000 ;
-
-  G29 ;'
+- ''
 - ';Sliced at: {day} {date} {time}
 
   ;Basic settings: Layer height: {layer_height} Walls: {wall_thickness} Fill: {fill_density}
