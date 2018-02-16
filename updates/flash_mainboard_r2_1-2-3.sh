@@ -22,9 +22,6 @@ flash_arduino () {
 sudo service octoprint stop
 sleep 10
 
-#make sure octoprint instance is dead
-sudo pkill -9 octoprint
-
 #install pyserial
 sudo pip install pyserial
 
