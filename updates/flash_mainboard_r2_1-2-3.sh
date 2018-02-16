@@ -18,21 +18,27 @@ flash_arduino () {
      avrdude -p m2560 -c wiring -P $SERIAL_PATH -b 115200 -F -v -U flash:w:$1 -D
 }
 
-# #get pyserial
+#kill octoprint instance if it is not already deal
 sudo service octoprint stop
+sleep 10
+
+#make sure octoprint instance is dead
+sudo pkill -9 octoprint
+
+#install pyserial
 sudo pip install pyserial
 
-# #AVRDude
+#install AVRDude
 apt-get install -y avrdude
 #flash the board
 cd $THIS_DIR/../assets/Hex_Assets
 
 #Erase EEPROM for 1.1.6 firmware. If this doesn't happen the user will get a nasty error that they will not be able to fix on their own.
 flash_arduino EEPROM_ERASE.hex
-#Let the Erase happen
-sleep 10
+#monitor erasure
+python erase_eeprom.py
 #Flash the actual firmware
-flash_arduino Marlin.R2.1.2.3.hex
+flash_arduino Marlin_1.1.6_RoboVersion_1.2.4_R2.hex
 
 #Ensure baudrate == 115200 in config.yaml
 $USER_PI $HOME_DIR/$VENV/bin/python replace_baudrate.py
