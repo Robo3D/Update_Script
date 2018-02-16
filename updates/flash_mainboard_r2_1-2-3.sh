@@ -34,7 +34,7 @@ apt-get install -y avrdude
 cd $THIS_DIR/../assets/Hex_Assets
 
 #Erase EEPROM for 1.1.6 firmware. If this doesn't happen the user will get a nasty error that they will not be able to fix on their own.
-flash_arduino EEPROM_ERASE.hex
+flash_arduino ERASE_EEPROM.hex
 #monitor erasure
 python erase_eeprom.py
 #Flash the actual firmware
