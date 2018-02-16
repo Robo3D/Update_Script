@@ -125,7 +125,20 @@ class Update_Checker():
             for update in self.needed_updates:
                 print("Executing " + update)
                 logging.info("Start... package: {}".format(update))
-                subprocess.call(["sudo bash "+ self.updates_path + update], shell=True)
+                command = "sudo bash "+ self.updates_path + update
+
+                #make a process
+                temp_p = subprocess.Popen(command,
+                stdout=subprocess.PIPE,
+                shell=True
+                )
+                #get the output 
+                output, error = temp_p.communicate()
+                #wait for process to finish
+                p_status = temp_p.wait()
+                #log output to log
+                logging.info(output)
+                #log complete when finished.
                 logging.info("Complete... package: {}".format(update))
 
             logging.info("Updating Version...")

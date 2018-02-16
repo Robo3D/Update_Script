@@ -9,6 +9,8 @@ USER_PI="sudo -u pi"
 
 kill_octoprint () {
     service octoprint stop
+    sleep 10
+    sudo pkill -9 octoprint
 }
 #-------------------------------Kivy Update Screen-----------------------------------
 
