@@ -13,6 +13,9 @@ rm $SLICING_DIR/"high_quality_(raft).profile"
 rm $SLICING_DIR/low_quality.profile
 rm $SLICING_DIR/midpla.profile
 rm $SLICING_DIR/"normal_quality_(raft).profile"
+rm $SLICING_DIR/robo.profile
+rm $SLICING_DIR/medium_quality.profile
+rm $SLICING_DIR/ultra_high_quality.profile
 
 $USER_PI cp -a $THIS_DIR/../assets/slicing_profiles_r2/. $SLICING_DIR
 
