@@ -13,7 +13,7 @@ class Update_Checker():
         logging.basicConfig(filename='/home/pi/update_script.log', level=logging.DEBUG)
         logging.info('Update_Checker imported')
 
-        self.version = '2.0.0-r2.5'
+        self.version = '2.0.0-r2.6'
         self.current_path = os.path.dirname(os.path.realpath(__file__))
         print("Current Directory is: " + self.current_path)
 
