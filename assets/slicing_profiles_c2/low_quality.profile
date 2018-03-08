@@ -23,7 +23,7 @@ fan_speed: 100
 fan_speed_max: 100
 filament_diameter:
 - 1.75
-- 1.75
+- false
 - false
 - false
 filament_flow: 90
@@ -48,8 +48,8 @@ overlap_dual: 0.15
 platform_adhesion: raft
 print_speed: 60
 print_temperature:
-- 195
-- 195
+- 190
+- false
 - false
 - false
 raft_airgap: 0.25

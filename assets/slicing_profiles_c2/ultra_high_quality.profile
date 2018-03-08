@@ -23,7 +23,7 @@ fan_speed: 100
 fan_speed_max: 100
 filament_diameter:
 - 1.75
-- 1.75
+- false
 - false
 - false
 filament_flow: 90
@@ -49,7 +49,7 @@ platform_adhesion: raft
 print_speed: 50
 print_temperature:
 - 190
-- 190
+- false
 - false
 - false
 raft_airgap: 0.25
