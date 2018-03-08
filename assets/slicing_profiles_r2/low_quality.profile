@@ -23,7 +23,7 @@ fan_speed: 100
 fan_speed_max: 100
 filament_diameter:
 - 1.75
-- 1.75
+- false
 - false
 - false
 filament_flow: 100
@@ -50,7 +50,7 @@ print_bed_temperature: 60
 print_speed: 60
 print_temperature:
 - 190
-- 190
+- false
 - false
 - false
 raft_airgap: 0.25
