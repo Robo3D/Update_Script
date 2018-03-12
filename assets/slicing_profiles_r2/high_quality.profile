@@ -50,7 +50,7 @@ print_temperature:
 - false
 - false
 - false
-rraft_airgap: 0.25
+raft_airgap: 0.25
 raft_airgap_all: 0.0
 raft_interface_thickness: 0.27
 raft_interface_linewidth: 0.4
